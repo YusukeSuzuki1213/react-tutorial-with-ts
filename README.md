@@ -1,3 +1,3 @@
 # react-tutorial-with-ts
-Following [TypeScript React Starter](https://github.com/Microsoft/TypeScript-React-Starter)
+Following [Tutorial: Intro to React](https://reactjs.org/tutorial/tutorial.html#completing-the-game)
 
