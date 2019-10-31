@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { string } from 'prop-types';
 
 type SquareProps = {
-  value: string | null;
+  value: string;
   onClick: () => void;
 }
 
 type BoardState = {
   squares: string[];
+  xIsNext: boolean;
 }
 
 /**
@@ -18,7 +18,7 @@ type BoardState = {
 const Square = (props: SquareProps) => (
   <button
     className="square"
-    onClick={ () => props.onClick() }
+    onClick={ props.onClick }
   >
     {props.value}
   </button>
@@ -30,32 +30,36 @@ const Square = (props: SquareProps) => (
 class Board extends React.Component<BoardState> {
   state: BoardState = {
     squares: new Array<string>(9).fill(''),
+    xIsNext: true,
   }
   /**
    *
    */
   private handleClick = (i: number) => {
     const squares = this.state.squares.slice();
-    squares[i] = 'X';
-    this.setState({squares: squares});
+    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    this.setState({
+      squares: squares,
+      xIsNext: !this.state.xIsNext,
+    });
   }
   /**
    * Squareコンポーネントを返却する関数
    * @param i  マス目に表示する数字
    * @return Squareコンポーネント
    */
-  private renderSquare = (i: number) => {
+  private renderSquare = (i: number) => (
     <Square
       value={ this.state.squares[i] }
       onClick={ () => this.handleClick(i) }
-    />;
-  }
+    />
+  );
   /**
    * 3×3 のSquareコンポーネントを返却する関数
    * @returns 3×3 のSquareコンポーネント
    */
   render() {
-    const status: string = 'Next player: X';
+    const status: string = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
 
     return (
       <div>
@@ -93,7 +97,7 @@ class Game extends React.Component {
     return (
       <div className="game">
         <div className="game-board">
-          <Board squares={[]}/>
+          <Board squares={[]} xIsNext={ false }/>
         </div>
         <div className="game-info">
           <div>{/* status */}</div>
