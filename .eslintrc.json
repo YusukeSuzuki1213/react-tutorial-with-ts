@@ -26,6 +26,7 @@
         "indent": [ "warn", 2 ],
         "no-unused-vars": [ "warn" ],
         "require-jsdoc": [ "warn" ],
-        "valid-jsdoc": ["off"]
+        "valid-jsdoc": ["off"],
+        "no-invalid-this": ["off"]
     }
 }
