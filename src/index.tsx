@@ -12,24 +12,17 @@ type BoardState = {
 }
 
 /**
- * tic-tac-toeのマス目に対応するクラス
+ * マス目をクリックしたら'X'が表示されるような、button DOMノードを返却する関数
+ * @returns button DOMノード
  */
-class Square extends React.Component<SquareProps> {
-  /**
-   * マス目をクリックしたら'X'が表示されるような、button DOMノードを返却する関数
-   * @returns button DOMノード
-   */
-  render() {
-    return (
-      <button
-        className="square"
-        onClick={ () => this.props.onClick() }
-      >
-        {this.props.value}
-      </button>
-    );
-  }
-}
+const Square = (props: SquareProps) => (
+  <button
+    className="square"
+    onClick={ () => props.onClick() }
+  >
+    {props.value}
+  </button>
+);
 
 /**
  * tic-tac-toeの盤面に対応するクラス
@@ -52,12 +45,10 @@ class Board extends React.Component<BoardState> {
    * @return Squareコンポーネント
    */
   private renderSquare = (i: number) => {
-    return (
-      <Square
-        value={ this.state.squares[i] }
-        onClick={ () => this.handleClick(i) }
-      />
-    );
+    <Square
+      value={ this.state.squares[i] }
+      onClick={ () => this.handleClick(i) }
+    />;
   }
   /**
    * 3×3 のSquareコンポーネントを返却する関数
